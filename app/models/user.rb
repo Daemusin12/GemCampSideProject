@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :username, presence: true, uniqueness: true
+  
+  enum genre: { client: 0, admin: 1 }
 end
