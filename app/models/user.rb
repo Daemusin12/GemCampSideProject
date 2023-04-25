@@ -5,6 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :username, presence: true, uniqueness: true
+  validates :phone_number, phone: {
+    possible: true,
+    allow_blank: true,
+    types: %i[voip mobile],
+    countries: [:ph]
+  }
   
   enum genre: { client: 0, admin: 1 }
 end
