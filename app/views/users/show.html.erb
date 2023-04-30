@@ -1,0 +1,25 @@
+<section class="vh-100 gradient-custom">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-10">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body p-5">
+            <div class="mb-md-5 mt-md-4 pb-5">
+              <div><%= image_tag @user.image.url if @user.image.present? %></div>
+              <p class="text-white-50 mb-5">Username: <%= @user.username %></p>
+              <p class="text-white-50 mb-5">Email: <%= @user.email %></p>
+              <p class="text-white-50 mb-5">Coins: <%= @user.coins %></p>
+              <div class="actions text-center mb-4">
+                <button class="btn btn-outline-light btn-lg col-10">CASH IN</button>
+              </div>
+              <div class="d-flex justify-content-around mb-4 align-content-between">
+                <%= link_to 'Edit Profile', edit_user_registration_path, class:"btn btn-outline-light btn-lg col-xl-4 m-2" %>
+                <button class="btn btn-outline-light btn-lg col-xl-4 m-2">Address</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
