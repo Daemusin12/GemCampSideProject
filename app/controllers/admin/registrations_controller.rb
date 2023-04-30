@@ -5,14 +5,16 @@ class Admin::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    flash[:alert] = 'Registrations are not open.'
+    redirect_to admin_home_index_path
+  end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    flash[:alert] = 'Registrations are not open.'
+    redirect_to admin_home_index_path
+  end
 
   # GET /resource/edit
   # def edit

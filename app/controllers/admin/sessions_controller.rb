@@ -24,4 +24,13 @@ class Admin::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  def after_sign_in_path_for(resource)
+    if admin_user_signed_in?
+      admin_home_index_path
+    else
+      new_admin_user_session_path
+    end
+  end
+
 end
