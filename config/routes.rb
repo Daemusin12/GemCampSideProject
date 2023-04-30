@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :users do
       resources :home
     end
+    resources :users
   end
 
   constraints(AdminDomainConstraint.new) do
