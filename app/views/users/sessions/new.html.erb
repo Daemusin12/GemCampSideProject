@@ -1,26 +1,53 @@
-<h2>Log in</h2>
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+            <div class="mb-md-5 mt-md-4 pb-5">
+              <h2 class="fw-bold mb-2 text-uppercase">Client Login</h2>
+              <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <%= link_to "Login", session_path(resource_name), class:"nav-link active" %>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <%= link_to "Register", new_registration_path(resource_name), class:"nav-link" %>
+                </li>
+              </ul>
+              <!-- Pills navs -->
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+              <!-- Pills content -->
+              <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                  <div class="form-outline form-white mb-4">
+                    <%= f.label :email, class: "form-label" %><br/>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg" %>
+                  </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+                  <div class="form-outline form-white mb-4">
+                    <%= f.label :password, class: "form-label" %><br/>
+                    <%= f.password_field :password, autocomplete: "current-password", class: "form-control form-control-lg" %>
+                  </div>
+
+                  <% if devise_mapping.rememberable? %>
+                    <div class="field">
+                      <%= f.check_box :remember_me, class: "form-check-input" %>
+                      <%= f.label :remember_me %>
+                    </div>
+                  <% end %>
+
+                  <div class="actions">
+                    <%= f.submit "Log in", class: "btn btn-outline-light btn-lg px-5" %>
+                  </div>
+
+                <% end %>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</section>
