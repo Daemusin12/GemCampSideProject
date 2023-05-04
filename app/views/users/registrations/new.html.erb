@@ -23,10 +23,13 @@
                   <div class="form-outline form-white mb-4">
                     <%= render "devise/shared/error_messages", resource: resource %>
                   </div>
-                  <div class="form-outline mb-4">
-                    <%= f.label :username, class: "form-label" %><br/>
-                    <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control" %>
-                  </div>
+
+                  <% if @promoter_user.present? %>
+                    <div class="form-outline mb-4">
+                      <%= f.label :promoter_email, class: "form-label" %><br/>
+                      <%= f.text_field :promoter_email, value: @promoter_user.email, class: "form-control", readonly: true %><br/>
+                    </div>
+                  <% end %>
 
                   <div class="form-outline mb-4">
                     <%= f.label :email, class: "form-label" %><br/>

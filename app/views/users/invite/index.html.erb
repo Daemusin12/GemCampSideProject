@@ -1,0 +1,8 @@
+<h1>Users::Invite#index</h1>
+<p>Find me in app/views/users/invite/index.html.erb</p>
+<div>
+<%= @user.qr_code.html_safe %>
+</div>
+<div>
+  <%= link_to "#{@user.invite_link}", "#{@user.invite_link}" %>
+</div>

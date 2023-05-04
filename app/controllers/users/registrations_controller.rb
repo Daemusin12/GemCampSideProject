@@ -5,14 +5,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    if cookies[:promoter_user].blank?
+       cookies[:promoter_user] = params[:promoter]
+    end
+    @promoter_user = User.find_by_email(cookies[:promoter_user])
+    super
+  end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    params[:user][:parent_id] = User.find_by_email(cookies[:promoter_user]).id
+    super
+  end
 
   # GET /resource/edit
   # def edit
@@ -42,7 +47,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:parent_id, :email])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
