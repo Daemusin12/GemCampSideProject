@@ -1,0 +1,58 @@
+<%= form_with model: address, url: path, data: { turbo: false, controller: :location } do |form| %>
+  <% if address.errors.any? %>
+    <ul>
+      <% address.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :genre %>
+    <%= form.select :genre, UserAddress.genres.map { |key, value| [key.humanize, key] }  %>
+  </div>
+  <div>
+    <%= form.label :is_default? %>
+    <%= form.select :is_default, [['Yes', true], ['No', false]] %>
+  </div>
+  <div>
+    <%= form.label :street_address %>
+    <%= form.text_field :street_address %>
+  </div>
+  <div>
+    <%= form.label :phone_number %>
+    <%= form.text_field :phone_number, data: { numeric: true } %>
+  </div>
+  <div class="field">
+    <%= form.label :region_id %>
+    <%= form.collection_select :address_region_id,
+                               Address::Region.all, :id, :name,
+                               { prompt: 'Please select region' }, class: 'select2',
+                               data: { location_target: 'selectedRegionId', action: 'change->location#fetchProvinces' } %>
+  </div>
+  <div class="field">
+    <%= form.label :province_id %>
+    <%= form.collection_select :address_province_id,
+                               [], nil, nil,
+                               { prompt: 'Please select province' }, class: 'select2',
+                               data: { location_target: 'selectedProvinceId', action: 'change->location#fetchCities' } %>
+  </div>
+  <div class="field">
+    <%= form.label :city_id %>
+    <%= form.collection_select :address_city_id,
+                               [], nil, nil,
+                               { prompt: 'Please select city' }, class: 'select2',
+                               data: { location_target: 'selectedCityId', action: 'change->location#fetchBarangays' } %>
+  </div>
+  <div class="field">
+    <%= form.label :barangay_id %>
+    <%= form.collection_select :address_barangay_id,
+                               [], nil, nil,
+                               { prompt: 'Please select barangay' }, class: 'select2',
+                               data: { location_target: 'selectedBarangayId' } %>
+  </div>
+  <%= form.submit %>
+<% end %>

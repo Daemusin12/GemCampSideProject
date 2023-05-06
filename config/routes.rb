@@ -23,7 +23,9 @@ Rails.application.routes.draw do
     namespace :users do
       resources :home
     end
-    resources :users
+    resources :users do
+      resources :user_addresses
+    end
   end
 
   constraints(AdminDomainConstraint.new) do

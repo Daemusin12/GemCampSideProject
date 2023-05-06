@@ -1,0 +1,33 @@
+<%= link_to 'Add New Address', new_user_user_address_path(@user) %>
+<table>
+  <thead>
+  <td>name</td>
+  <td>genre</td>
+  <td>is_default</td>
+  <td>street address</td>
+  <td>phone_number</td>
+  <td>region</td>
+  <td>province</td>
+  <td>city</td>
+  <td>barangay</td>
+  <td>remark</td>
+  </thead>
+  <% @addresses.each do |address| %>
+    <tr>
+      <td><%= address.name %></td>
+      <td><%= address.genre %></td>
+      <td><%= address&.is_default %></td>
+      <td><%= address&.street_address %></td>
+      <td><%= address&.phone_number %></td>
+      <td><%= address.region&.name%></td>
+      <td><%= address.province&.name%></td>
+      <td><%= address.city&.name%></td>
+      <td><%= address.barangay&.name%></td>
+      <td><%= address&.remark%></td>
+      <td>
+      <%= link_to 'Edit', edit_user_user_address_path(@user, address) %>
+      <%= button_to 'Delete', user_user_address_path(@user, address), method: :delete %>
+      </td>
+    </tr>
+  <% end %>
+</table>
