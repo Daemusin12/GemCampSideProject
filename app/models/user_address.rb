@@ -6,6 +6,7 @@ class UserAddress < ApplicationRecord
     types: %i[voip mobile],
     countries: [:ph]
   }
+  validate :address_per_user, on: :create
 
   enum genre: { home: 0, office: 1 }
 
@@ -15,4 +16,10 @@ class UserAddress < ApplicationRecord
   belongs_to :city, class_name: 'Address::City', foreign_key: 'address_city_id'
   belongs_to :barangay, class_name: 'Address::Barangay', foreign_key: 'address_barangay_id'
 
+  def address_per_user
+    address_count = UserAddress.where(user_id: (self.user_id)).count
+    if address_count >= 5
+      self.errors.add(:user_id, "max address per user reached")
+    end
+  end
 end
