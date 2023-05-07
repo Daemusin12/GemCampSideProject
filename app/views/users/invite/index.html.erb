@@ -1,0 +1,6 @@
+<div>
+  <%= @qr_code.html_safe %>
+</div>
+<div>
+  <%= link_to "#{new_user_registration_path(host: 'client.com', promoter: @user.email)}", new_user_registration_path(host: 'client.com', promoter: @user.email) %>
+</div>

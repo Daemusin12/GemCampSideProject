@@ -1,0 +1,2 @@
+module Users::InviteHelper
+end
