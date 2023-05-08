@@ -17,4 +17,9 @@ class User < ApplicationRecord
   enum role: { client: 0, admin: 1 }
 
   mount_uploader :image, ImageUploader
+
+  def members_deposit
+    children.sum(:total_deposit)
+  end
+
 end

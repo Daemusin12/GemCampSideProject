@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :home
     end
+    resources :admin
   end
 
 end
