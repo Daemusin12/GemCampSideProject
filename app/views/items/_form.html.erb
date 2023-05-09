@@ -1,0 +1,44 @@
+<%= form_with model: item do |form| %>
+  <% if item.errors.any? %>
+    <ul>
+      <% item.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div>
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity%>
+  </div>
+  <div>
+    <%= form.label :minimum_bets %>
+    <%= form.number_field :minimum_bets%>
+  </div>
+  <div>
+    <%= form.label :batch_count %>
+    <%= form.number_field :batch_count%>
+  </div>
+  <div>
+    <%= form.label :online_at %>
+    <%= form.datetime_field :online_at%>
+  </div>
+  <div>
+    <%= form.label :offline_at %>
+    <%= form.datetime_field :offline_at%>
+  </div>
+  <div>
+    <%= form.label :start_at %>
+    <%= form.datetime_field :start_at%>
+  </div>
+  <div>
+    <%= form.submit :submit %>
+  </div>
+<% end %>
