@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     end
     resources :items
     resources :admin
+    resources :categories, except: :show
   end
 
 end
