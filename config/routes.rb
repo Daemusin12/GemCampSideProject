@@ -34,7 +34,12 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :home
     end
-    resources :items
+    resources :items do
+      post :start
+      post :pause
+      post :end
+      post :cancel
+    end
     resources :admin
     resources :categories, except: :show
   end

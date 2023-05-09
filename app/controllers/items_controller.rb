@@ -41,6 +41,50 @@ class ItemsController < ApplicationController
     redirect_to items_path
   end
 
+  def start
+    @item = Item.find(params[:item_id])
+    if @item.may_start?
+      @item.start!
+      flash[:notice] = 'Started!'
+    else
+      flash[:notice] = "Can't start!"
+    end
+    redirect_to items_path
+  end
+
+  def pause
+    @item = Item.find(params[:item_id])
+    if @item.may_pause?
+      @item.pause!
+      flash[:notice] = 'Paused!'
+    else
+      flash[:notice] = "Can't pause!"
+    end
+    redirect_to items_path
+  end
+
+  def end
+    @item = Item.find(params[:item_id])
+    if @item.may_end?
+      @item.end!
+      flash[:notice] = 'Ended!'
+    else
+      flash[:notice] = "Can't end!"
+    end
+    redirect_to items_path
+  end
+
+  def cancel
+    @item = Item.find(params[:item_id])
+    if @item.may_cancel?
+      @item.cancel!
+      flash[:notice] = 'Canceled!'
+    else
+      flash[:notice] = "Can't cancel!"
+    end
+    redirect_to items_path
+  end
+
   private
 
   def set_item
