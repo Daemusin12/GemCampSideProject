@@ -28,7 +28,13 @@
       <td><%= item.offline_at%></td>
       <td><%= item.start_at%></td>
       <td><%= item.status%></td>
-      <td><%= button_to 'Delete', item_path(item), method: :delete %></td>
+      <td>
+        <%= button_to 'Delete', item_path(item), method: :delete %>
+        <%= button_to 'start', item_start_path(item), data: { turbo: false } if item.may_start? %>
+        <%= button_to 'pause', item_pause_path(item), data: { turbo: false } if item.may_pause? %>
+        <%= button_to 'end', item_end_path(item), data: { turbo: false } if item.may_end? %>
+        <%= button_to 'cancel', item_cancel_path(item), data: { turbo: false } if item.may_cancel? %>
+      </td>
     </tr>
   <% end %>
 </table>
