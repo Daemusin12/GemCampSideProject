@@ -20,7 +20,7 @@ class Item < ApplicationRecord
     state :starting, :paused, :ended, :cancelled
 
     event :start do
-      transitions from: [:pending, :paused, :ended, :cancelled], to: :starting
+      transitions from: [:pending, :paused, :ended, :cancelled], to: :starting, guard: :quantity_enough?, success: :deduct_count_and_add_batch!
     end
 
     event :pause do
@@ -35,5 +35,15 @@ class Item < ApplicationRecord
       transitions from: [:starting, :paused], to: :cancelled
     end
   end
+
+  def deduct_count_and_add_batch!
+    update(quantity: self.quantity - 1)
+    update(batch_count: self.batch_count + 1)
+  end
+
+  def quantity_enough?
+    quantity >= 1 && Time.current <= offline_at && active?
+  end
+
 
 end
