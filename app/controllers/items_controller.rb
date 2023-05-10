@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
 
   def index
-    @items = Item.all
+    @items = Item.includes(:categories).all
   end
 
   def new
@@ -49,7 +49,7 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :image, :quantity, :minimum_bets, :batch_count,
-                                 :online_at, :offline_at, :start_at)
+                                 :online_at, :offline_at, :start_at, category_ids: [])
   end
 
 end
