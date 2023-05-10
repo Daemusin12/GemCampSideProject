@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'lottery/index'
 
   namespace :api do
     namespace :v1 do
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
     resources :users do
       resources :user_addresses
     end
+    resources :lottery
   end
 
   constraints(AdminDomainConstraint.new) do

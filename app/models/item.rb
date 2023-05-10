@@ -45,5 +45,5 @@ class Item < ApplicationRecord
     quantity >= 1 && Time.current <= offline_at && active?
   end
 
-
+  scope :filter_by_category, ->(selected_categories) { includes(:categories).where(categories: { name: selected_categories} ) }
 end
