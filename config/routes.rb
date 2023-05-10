@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'bet/index'
   get 'lottery/index'
 
   namespace :api do
@@ -44,6 +45,7 @@ Rails.application.routes.draw do
     end
     resources :admin
     resources :categories, except: :show
+    resources :bet
   end
 
 end
