@@ -43,6 +43,9 @@
     <%= form.select :status, Item.statuses.keys %>
   </div>
   <div>
+    <%= form.collection_check_boxes :category_ids, Category.all, :id, :name %>
+  </div>
+  <div>
     <%= form.submit :submit %>
   </div>
 <% end %>
