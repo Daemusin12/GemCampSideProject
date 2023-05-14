@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   constraints(AdminDomainConstraint.new) do
     get '/', to: 'admin/home#index'
+    get 'bet', to: 'bet#index'
     devise_for :users, as: 'admin', controllers: { sessions: 'admin/sessions', registrations: 'admin/registrations' }
     namespace :admin do
       resources :home
@@ -45,6 +46,9 @@ Rails.application.routes.draw do
     end
     resources :admin
     resources :categories, except: :show
+    resources :bet do
+      post :cancel
+    end
   end
 
 end

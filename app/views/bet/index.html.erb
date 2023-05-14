@@ -1,0 +1,22 @@
+<table class="table table-striped table-hover">
+  <thead>
+  <td>Item</td>
+  <td>User</td>
+  <td>Batch Count</td>
+  <td>Coins</td>
+  <td>State</td>
+  <td>Serial Number</td>
+  <td>Action</td>
+  </thead>
+  <% @bets.each do |bet| %>
+    <tr>
+      <td><%= bet.item.name %></td>
+      <td><%= bet.user.email %></td>
+      <td><%= bet.batch_count %></td>
+      <td><%= bet.coins %></td>
+      <td><%= bet.state %></td>
+      <td><%= bet.serial_number %></td>
+      <td><%= button_to 'cancel', bet_cancel_path(bet), data: { turbo: false } if bet.may_cancel? %></td>
+    </tr>
+  <% end %>
+</table>
