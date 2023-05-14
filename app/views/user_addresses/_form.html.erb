@@ -14,10 +14,12 @@
     <%= form.label :genre %>
     <%= form.select :genre, UserAddress.genres.map { |key, value| [key.humanize, key] }  %>
   </div>
-  <div>
-    <%= form.label :is_default? %>
-    <%= form.select :is_default, [['Yes', true], ['No', false]] %>
-  </div>
+  <% unless current_page?(:controller => 'user_addresses', :action => 'new') %>
+    <div>
+      <%= form.label :is_default? %>
+      <%= form.select :is_default, [['Yes', true], ['No', false]] %>
+    </div>
+  <% end %>
   <div>
     <%= form.label :street_address %>
     <%= form.text_field :street_address %>

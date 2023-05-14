@@ -1,4 +1,6 @@
 class UserAddress < ApplicationRecord
+  before_update :set_default_address
+  after_commit :default_address, on: [:create, :destroy]
   validates :name, presence: true, uniqueness: true
   validates :phone_number, phone: {
     possible: true,
@@ -7,6 +9,7 @@ class UserAddress < ApplicationRecord
     countries: [:ph]
   }
   validate :address_per_user, on: :create
+  # validate :default_address, on: :create
 
   enum genre: { home: 0, office: 1 }
 
@@ -20,6 +23,17 @@ class UserAddress < ApplicationRecord
     address_count = UserAddress.where(user_id: (self.user_id)).count
     if address_count >= 5
       self.errors.add(:user_id, "max address per user reached")
+    end
+  end
+
+  def set_default_address
+    UserAddress.where(user_id: (self.user_id)).update_all(is_default: false)
+  end
+
+  def default_address
+    address_count = UserAddress.where(user_id: (self.user_id)).count
+    if address_count == 1
+      UserAddress.where(user_id: (self.user_id)).update(is_default: true)
     end
   end
 end
