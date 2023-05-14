@@ -6,6 +6,7 @@ class Item < ApplicationRecord
 
   has_many :item_category_ships
   has_many :categories, through: :item_category_ships
+  has_many :bets, dependent: :restrict_with_error
 
   mount_uploader :image, ImageUploader
 
