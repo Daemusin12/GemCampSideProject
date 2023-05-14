@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   end
 
   constraints(ClientDomainConstraint.new) do
+    get 'lottery', to: 'lottery#index'
     devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
     namespace :users do
       resources :home
