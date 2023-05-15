@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     resources :users do
       resources :user_addresses
     end
+    resources :lotteries
   end
 
   constraints(AdminDomainConstraint.new) do

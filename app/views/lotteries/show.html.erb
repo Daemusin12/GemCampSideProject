@@ -1,0 +1,24 @@
+<div><%= image_tag @item.image.url if @item.image.present? %></div>
+<div><%= @item.name %></div>
+<% if user_signed_in? %>
+  <%= form_with model: @bet, url: lotteries_path, method: :post do |f| %>
+    <% if @bet.errors.any? %>
+      <ul>
+        <% @bet.errors.each do |bet| %>
+          <li><%= bet.errors.full_message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <div>
+      <%= f.label :coins %>
+      <%= f.number_field :coins %>
+      <%= f.hidden_field :item_id, value: params[:id] %>
+    </div>
+    <div>
+      <%= f.submit 'Bet' %>
+    </div>
+  <% end %>
+<% else %>
+  <%= link_to 'Sign in to bet', new_user_session_path %>
+<% end %>
+
