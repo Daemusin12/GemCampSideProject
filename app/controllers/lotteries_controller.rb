@@ -1,4 +1,4 @@
-class LotteryController < ApplicationController
+class LotteriesController < ApplicationController
 
   def index
     @items = Item.includes(:categories).active.starting
