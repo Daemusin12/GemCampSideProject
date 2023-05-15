@@ -4,6 +4,7 @@ class Bet < ApplicationRecord
 
   belongs_to :user
   belongs_to :item
+  validate :check_user_coins
 
   after_create :assign_serial_number, :deduct_coins
 
@@ -37,6 +38,12 @@ class Bet < ApplicationRecord
 
   def refund_coins
     self.user.update(coins: self.user.coins + self.coins)
+  end
+
+  def check_user_coins
+    if self.user.coins <= 0
+      self.errors.add(:coins, "Not enough coins")
+    end
   end
 
   scope :filter_by_item, ->(item) { where(item: Item.where(name: item) ) }
