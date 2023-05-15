@@ -39,4 +39,11 @@ class Bet < ApplicationRecord
     self.user.update(coins: self.user.coins + self.coins)
   end
 
+  scope :filter_by_item, ->(item) { where(item: Item.where(name: item) ) }
+  scope :filter_by_email, ->(email) { where(user: User.where(email: email) ) }
+  scope :filter_by_state, ->(state) { where(state: state ) }
+  scope :filter_by_serial, ->(serial) { where(serial_number: serial ) }
+  scope :filter_by_start_date, ->(start_date) { where('created_at >=? ', Date.parse(start_date).beginning_of_day) }
+  scope :filter_by_end_date, ->(end_date) { where('created_at <=?', Date.parse(end_date).end_of_day) }
 end
+
