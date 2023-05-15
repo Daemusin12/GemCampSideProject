@@ -33,7 +33,7 @@ class Item < ApplicationRecord
     end
 
     event :cancel do
-      transitions from: [:starting, :paused], to: :cancelled
+      transitions from: [:starting, :paused], to: :cancelled, success: :cancel_bets
     end
   end
 
@@ -44,6 +44,10 @@ class Item < ApplicationRecord
 
   def quantity_enough?
     quantity >= 1 && Time.current <= offline_at && active?
+  end
+
+  def cancel_bets
+    Bet.where(item: self, batch_count: self.batch_count).each {|bet| bet.cancel! if bet.may_cancel? }
   end
 
   scope :filter_by_category, ->(selected_categories) { includes(:categories).where(categories: { name: selected_categories} ) }
