@@ -8,14 +8,15 @@ class LotteriesController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @bet = Bet.new
+    @bets = Bet.where(user: current_user, item: @item, batch_count: @item.batch_count)
   end
 
   def create
     @bets_qty = params[:bet][:coins].to_i
     @bets_qty.times do
       @bet = Bet.new
-      @item = Item.find(params[:bet][:item_id])
       @bet.user = current_user
+      @item = Item.starting.find(params[:bet][:item_id])
       @bet.item = @item
       @bet.batch_count = @item.batch_count
       if @bet.save
