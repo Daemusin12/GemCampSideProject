@@ -1,4 +1,5 @@
 class BetController < ApplicationController
+  before_action :authenticate_admin_user!
   def index
     @bets = Bet.all
     @bets = @bets.filter_by_item(params[:item_name]) if params[:item_name].present?
