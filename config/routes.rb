@@ -56,6 +56,10 @@ Rails.application.routes.draw do
       post :cancel
     end
     resources :offers
+    resources :orders do
+      post :pay
+      post :cancel
+    end
   end
 
 end

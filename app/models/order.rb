@@ -18,7 +18,7 @@ class Order < ApplicationRecord
     end
 
     event :cancel do
-      transitions from: [:pending, :submitted, :cancelled], to: :cancelled, guard: :check_user_coins, success: [:cancel_is_deduct, :cancel_is_deposit]
+      transitions from: [:pending, :submitted, :paid], to: :cancelled, guard: :check_user_coins, success: [:cancel_is_deduct, :cancel_is_deposit]
     end
 
     event :pay do
@@ -66,4 +66,11 @@ class Order < ApplicationRecord
     }-#{self.id}-#{self.user_id}-#{sprintf '%04d', number_count}")
   end
 
+  scope :filter_by_serial, ->(serial) { where(serial_number: serial ) }
+  scope :filter_by_email, ->(email) { where(user: User.where(email: email) ) }
+  scope :filter_by_genre, ->(genre) { where(state: genre ) }
+  scope :filter_by_state, ->(state) { where(state: state ) }
+  scope :filter_by_offer, ->(state) { where(offer: Offer.where(name: state) ) }
+  scope :filter_by_start_date, ->(start_date) { where('created_at >=? ', Date.parse(start_date).beginning_of_day) }
+  scope :filter_by_end_date, ->(end_date) { where('created_at <=?', Date.parse(end_date).end_of_day) }
 end
