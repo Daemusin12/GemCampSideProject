@@ -4,7 +4,7 @@
     <%= text_field_tag :item_name, params[:item_name], placeholder: 'Search by item' %>
     <%= text_field_tag :email, params[:email], placeholder: 'Search by email' %>
     <%= label_tag :state, 'Search by state' %>
-    <%= select_tag :state, options_for_select(['betting', 'won', 'lost', 'cancelled'], params[:state]), include_blank: "?" %>
+    <%= select_tag :state, options_for_select(Winner.aasm.states.map(&:name), params[:state]), include_blank: "?" %>
     <%= text_field_tag :serial_number, params[:serial_number], placeholder: 'Search by serial number' %>
     <%= label_tag :date, 'Search by date' %>
     <%= date_field_tag :start_date, params[:start_date] %>

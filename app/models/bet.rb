@@ -12,11 +12,11 @@ class Bet < ApplicationRecord
     state :betting, initial: true
     state :won, :lost, :cancelled
 
-    event :won do
+    event :win do
       transitions from: :betting, to: :won
     end
 
-    event :lost do
+    event :lose do
       transitions from: :betting, to: :lost
     end
 
