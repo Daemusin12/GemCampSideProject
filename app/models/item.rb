@@ -29,7 +29,7 @@ class Item < ApplicationRecord
     end
 
     event :end do
-      transitions from: :starting, to: :ended
+      transitions from: :starting, to: :ended, guard: :minimum_bets?, success: :set_winner
     end
 
     event :cancel do
@@ -48,6 +48,23 @@ class Item < ApplicationRecord
 
   def cancel_bets
     Bet.where(item: self, batch_count: self.batch_count).each {|bet| bet.cancel! if bet.may_cancel? }
+  end
+
+  def minimum_bets?
+    @bet_count = Bet.where(item: self, batch_count: self.batch_count).count
+    @bet_count >= self.minimum_bets
+  end
+
+  def set_winner
+    @bets = Bet.where(item: self, batch_count: self.batch_count)
+    winner_bet = @bets.sample
+    winner_bet.win!
+    @bets.each do | bet |
+      unless bet.state == 'won'
+        bet.lose!
+      end
+    end
+    Winner.create(item: self, bet: winner_bet, user: winner_bet.user, item_batch_count: self.batch_count)
   end
 
   scope :filter_by_category, ->(selected_categories) { includes(:categories).where(categories: { name: selected_categories} ) }
