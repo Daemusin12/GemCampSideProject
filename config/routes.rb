@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   constraints(ClientDomainConstraint.new) do
     get '/', to: 'users/home#index'
     get 'lotteries', to: 'lotteries#index'
+    get 'shop', to: 'shop#index'
     devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
     namespace :users do
       resources :home
@@ -30,6 +31,9 @@ Rails.application.routes.draw do
       resources :user_addresses
     end
     resources :lotteries
+    resources :shop do
+      get :buy
+    end
   end
 
   constraints(AdminDomainConstraint.new) do
