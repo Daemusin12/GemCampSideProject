@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     resources :bet do
       post :cancel
     end
+    resources :offers
   end
 
 end

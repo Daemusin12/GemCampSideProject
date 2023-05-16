@@ -1,0 +1,28 @@
+<h1>Offers</h1>
+<td><%= link_to 'New', new_offer_path%></td>
+<table class="table table-striped table-hover">
+  <thead>
+  <td>Image</td>
+  <td>Name</td>
+  <td>Genre</td>
+  <td>Status</td>
+  <td>Amount</td>
+  <td>Coins</td>
+  <td>Action</td>
+  </thead>
+  <% @offers.each do |offer| %>
+    <tr>
+      <td><%= image_tag offer.image.url if offer.image.present? %></td>
+      <td><%= offer.name %></td>
+      <td><%= offer.genre %></td>
+      <td><%= offer.status %></td>
+      <td><%= offer.amount %></td>
+      <td><%= offer.coins %></td>
+      <td>
+        <%= link_to 'Show', offer_path(offer) %>
+        <%= link_to 'Edit', edit_offer_path(offer) %>
+        <%= button_to 'Delete', offer_path(offer), method: :delete %>
+      </td>
+    </tr>
+  <% end %>
+</table>

@@ -1,0 +1,19 @@
+<table class="table table-striped table-hover">
+  <thead>
+  <td>Image</td>
+  <td>Name</td>
+  <td>Genre</td>
+  <td>Status</td>
+  <td>Amount</td>
+  <td>Coins</td>
+  <td>Action</td>
+  </thead>
+  <tr>
+    <td><%= image_tag @offer.image.url if @offer.image.present? %></td>
+    <td><%= @offer.name %></td>
+    <td><%= @offer.genre %></td>
+    <td><%= @offer.status %></td>
+    <td><%= @offer.amount %></td>
+    <td><%= @offer.coins %></td>
+  </tr>
+</table>

@@ -1,0 +1,36 @@
+<%= form_with model: offer do |form| %>
+  <% if offer.errors.any? %>
+    <ul>
+      <% offer.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div>
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :genre %>
+    <%= form.select :genre, Offer.genres.keys %>
+  </div>
+  <div>
+    <%= form.label :status %>
+    <%= form.select :status, Offer.statuses.keys %>
+  </div>
+  <div>
+    <%= form.label :amount %>
+    <%= form.number_field :amount%>
+  </div>
+  <div>
+    <%= form.label :coin %>
+    <%= form.number_field :coin%>
+  </div>
+  <div>
+    <%= form.submit :submit %>
+  </div>
+<% end %>
