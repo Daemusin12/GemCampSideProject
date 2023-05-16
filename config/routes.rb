@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   constraints(AdminDomainConstraint.new) do
     get '/', to: 'admin/home#index'
     get 'bet', to: 'bet#index'
+    get 'winner', to: 'winner#index'
     devise_for :users, as: 'admin', controllers: { sessions: 'admin/sessions', registrations: 'admin/registrations' }
     namespace :admin do
       resources :home

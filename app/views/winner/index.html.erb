@@ -1,0 +1,38 @@
+<div>
+  <%= form_tag bet_path, method: :get do %>
+    <p>Filters</p>
+    <%= text_field_tag :serial_number, params[:serial_number], placeholder: 'Search by serial number' %>
+    <%= text_field_tag :email, params[:email], placeholder: 'Search by email' %>
+    <%= label_tag :state, 'Search by state' %>
+    <%= select_tag :state, options_for_select(Bet.aasm.states.map(&:name), params[:state]), include_blank: "?" %>
+    <%= label_tag :date, 'Search by date' %>
+    <%= date_field_tag :start_date, params[:start_date] %>
+    <%= date_field_tag :end_date, params[:end_date] %>
+    <%= submit_tag 'Search' %>
+  <% end %>
+</div>
+<table class="table table-striped table-hover">
+  <thead>
+  <td>Serial Number</td>
+  <td>Email</td>
+  <td>State</td>
+  <td>Action</td>
+  </thead>
+  <% @winners.each do |winner| %>
+    <tr>
+      <td><%= winner.bet.serial_number %></td>
+      <td><%= winner.user.email %></td>
+      <td><%= winner.state %></td>
+      <td>
+        <%= button_to 'claim', winner_claim_path(winner), data: { turbo: false } if winner.may_claim? %>
+        <%= button_to 'submit', winner_submit_path(winner), data: { turbo: false } if winner.may_submit? %>
+        <%= button_to 'pay', winner_pay_path(winner), data: { turbo: false } if winner.may_pay? %>
+        <%= button_to 'ship', winner_ship_path(winner), data: { turbo: false } if winner.may_ship? %>
+        <%= button_to 'deliver', winner_deliver_path(winner), data: { turbo: false } if winner.may_deliver? %>
+        <%= button_to 'share', winner_share_path(winner), data: { turbo: false } if winner.may_share? %>
+        <%= button_to 'publish', winner_publish_path(winner), data: { turbo: false } if winner.may_publish? %>
+        <%= button_to 'remove publish', winner_remove_publish_path(winner), data: { turbo: false } if winner.may_remove_publish? %>
+      </td>
+    </tr>
+  <% end %>
+</table>
