@@ -6,6 +6,9 @@ class OffersController < ApplicationController
     @offers = Offer.all
   end
 
+  def new
+    @offer = Offer.new
+  end
   def create
     @offer = Offer.new(offer_params)
     if @offer.save

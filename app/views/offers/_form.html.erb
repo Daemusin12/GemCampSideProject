@@ -1,7 +1,7 @@
-<%= form_with model: offer do |form| %>
-  <% if offer.errors.any? %>
+<%= form_with model: @offer do |form| %>
+  <% if @offer.errors.any? %>
     <ul>
-      <% offer.errors.each do |error| %>
+      <% @offer.errors.each do |error| %>
         <li><%= error.full_message %></li>
       <% end %>
     </ul>
@@ -27,8 +27,8 @@
     <%= form.number_field :amount%>
   </div>
   <div>
-    <%= form.label :coin %>
-    <%= form.number_field :coin%>
+    <%= form.label :coins %>
+    <%= form.number_field :coins%>
   </div>
   <div>
     <%= form.submit :submit %>
