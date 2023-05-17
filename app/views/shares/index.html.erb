@@ -1,0 +1,16 @@
+<table class="table table-striped table-hover">
+  <thead>
+  <td>Picture</td>
+  <td>Email</td>
+  <td>Comment</td>
+  <td>State</td>
+  </thead>
+  <% @winners.each do |winner| %>
+    <tr>
+      <td><%= image_tag winner.picture.url if winner.picture.present? %></td>
+      <td><%= winner.user.email %></td>
+      <td><%= winner.comment %></td>
+      <td><%= winner.state %></td>
+    </tr>
+  <% end %>
+</table>

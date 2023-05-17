@@ -1,6 +1,10 @@
 class SharesController < ApplicationController
   before_action :authenticate_user!
 
+
+  def index
+    @winners = Winner.where(state: 'published')
+  end
   def edit
     @winner = Winner.where(user: current_user).find_by(params[:id])
   end
