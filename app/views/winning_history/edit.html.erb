@@ -1,0 +1,6 @@
+<%= form_with model: @winner, url: user_winning_history_path(current_user, @winner), data: {turbo: false} do |form| %>
+  <%= form.label :user_address %>
+  <%= form.select :user_address_id, options_for_select(current_user.user_addresses.map { |address| [address.address_concatenation, address.id] }),
+                  { prompt: "Select Address" }%>
+  <%= form.submit 'Submit' %>
+<% end %>

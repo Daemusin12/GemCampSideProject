@@ -16,6 +16,7 @@ class User < ApplicationRecord
   has_many :bets
   has_many :winners
   has_many :winners, foreign_key: 'admin_id'
+  has_many :user_addresses
 
   enum role: { client: 0, admin: 1 }
 

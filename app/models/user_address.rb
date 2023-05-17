@@ -36,4 +36,9 @@ class UserAddress < ApplicationRecord
       UserAddress.where(user_id: (self.user_id)).update(is_default: true)
     end
   end
+
+  def address_concatenation
+    "#{street_address}, #{region&.name}, #{province&.name}, #{city&.name}, #{barangay&.name}"
+  end
+
 end
