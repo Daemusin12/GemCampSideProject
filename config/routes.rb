@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       resources :lottery_history
       resources :winning_history
       resources :invitation_history
+      resources :shares
     end
     resources :lotteries
     resources :shop do

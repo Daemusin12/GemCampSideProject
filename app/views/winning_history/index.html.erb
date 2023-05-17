@@ -38,12 +38,15 @@
   </thead>
   <% @wins.each do |wins| %>
     <tr>
-      <td><%= image_tag win.picture.url if wins.picture.present? %></td>
+      <td><%= image_tag wins.picture.url if wins.picture.present? %></td>
       <td><%= wins.comment %></td>
       <td><%= wins.price %></td>
       <td><%= wins.state %></td>
       <td><%= wins.paid_at %></td>
-      <td><%= link_to 'claim', edit_user_winning_history_path(wins, current_user), data: { turbo: false } if wins.may_claim? %></td>
+      <td>
+        <%= link_to 'Claim', edit_user_winning_history_path(wins, current_user), data: { turbo: false } if wins.may_claim? %>
+        <%= link_to 'Share', edit_user_share_path(wins, current_user), data: { turbo: false } if wins.may_share? %>
+      </td>
     </tr>
   <% end %>
 </table>

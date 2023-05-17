@@ -1,0 +1,11 @@
+<%= form_with model: @winner, url: user_share_path(current_user, @winner), data: {turbo: false} do |form| %>
+  <div>
+    <%= form.label :picture %>
+    <%= form.file_field :picture %>
+  </div>
+  <div>
+    <%= form.label :comment %>
+    <%= form.text_area :comment %>
+  </div>
+  <%= form.submit 'Submit' %>
+<% end %>
