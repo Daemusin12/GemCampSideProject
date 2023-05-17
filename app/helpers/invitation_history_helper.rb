@@ -1,0 +1,2 @@
+module InvitationHistoryHelper
+end

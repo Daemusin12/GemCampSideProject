@@ -1,0 +1,2 @@
+module WinningHistoryHelper
+end

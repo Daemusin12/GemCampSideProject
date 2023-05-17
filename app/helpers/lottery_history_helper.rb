@@ -1,0 +1,2 @@
+module LotteryHistoryHelper
+end

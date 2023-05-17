@@ -27,3 +27,17 @@
 <%= link_to 'Lottery History', user_lottery_history_index_path(@user) %>
 <%= link_to 'Winning History', user_winning_history_index_path(@user) %>
 <%= link_to 'Invitation History', user_invitation_history_index_path(@user) %>
+<table class="table table-striped table-hover">
+  <thead>
+  <td>Email</td>
+  <td>Username</td>
+  <td>Phone</td>
+  </thead>
+  <% @children.each do |children| %>
+    <tr>
+      <td><%= children.email %></td>
+      <td><%= children.username %></td>
+      <td><%= children.phone_number %></td>
+    </tr>
+  <% end %>
+</table>

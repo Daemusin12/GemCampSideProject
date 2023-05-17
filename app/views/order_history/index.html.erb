@@ -27,3 +27,21 @@
 <%= link_to 'Lottery History', user_lottery_history_index_path(@user) %>
 <%= link_to 'Winning History', user_winning_history_index_path(@user) %>
 <%= link_to 'Invitation History', user_invitation_history_index_path(@user) %>
+<table class="table table-striped table-hover">
+  <thead>
+  <td>Serial number</td>
+  <td>Amount</td>
+  <td>Coins</td>
+  <td>State</td>
+  <td>Create At</td>
+  </thead>
+  <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.serial_number %></td>
+      <td><%= order.amount %></td>
+      <td><%= order.coins %></td>
+      <td><%= order.state %></td>
+      <td><%= order.created_at %></td>
+    </tr>
+  <% end %>
+</table>
