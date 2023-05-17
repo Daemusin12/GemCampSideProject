@@ -6,18 +6,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    if cookies[:promoter_user].blank?
-      cookies[:promoter_user] = params[:promoter]
+    if cookies[:promoter_email].blank?
+      cookies[:promoter_email] = params[:promoter]
     end
-    @promoter_user = User.find_by_email(cookies[:promoter_user])
+    @promoter_user = User.find_by_email(cookies[:promoter_email])
     super
   end
 
   # POST /resource
   def create
-    if @promoter_user.present?
-      params[:user][:parent_id] = User.find_by_email(cookies[:promoter_user]).id
-    end
+    params[:user][:parent_id] = User.find_by_email(cookies[:promoter_email])&.id
     super
   end
 
