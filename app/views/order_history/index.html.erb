@@ -34,6 +34,7 @@
   <td>Coins</td>
   <td>State</td>
   <td>Create At</td>
+  <td>Action</td>
   </thead>
   <% @orders.each do |order| %>
     <tr>
@@ -42,6 +43,7 @@
       <td><%= order.coins %></td>
       <td><%= order.state %></td>
       <td><%= order.created_at %></td>
+      <td><%= button_to 'cancel', user_order_history_cancel_path(current_user, order), data: { turbo: false } if order.may_cancel? %></td>
     </tr>
   <% end %>
 </table>

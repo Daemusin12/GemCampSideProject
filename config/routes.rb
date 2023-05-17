@@ -29,7 +29,9 @@ Rails.application.routes.draw do
     end
     resources :users do
       resources :user_addresses
-      resources :order_history
+      resources :order_history do
+        post :cancel
+      end
       resources :lottery_history
       resources :winning_history
       resources :invitation_history

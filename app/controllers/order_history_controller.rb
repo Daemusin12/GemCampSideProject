@@ -1,7 +1,6 @@
 class OrderHistoryController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
-  before_action :validate_user_profile
 
   def index
     @user = current_user
@@ -12,7 +11,15 @@ class OrderHistoryController < ApplicationController
     @user = User.find(params[:user_id])
   end
 
-  def validate_user_profile
-    raise ActionController::RoutingError.new('Not Found') unless @user == current_user
+  def cancel
+    @order = Order.find(params[:order_history_id])
+    if @order.may_cancel?
+      @order.cancel!
+      flash[:notice] = 'Cancelled!'
+    else
+      flash[:notice] = "Can't cancel!"
+    end
+      redirect_to user_order_history_index_path
   end
+
 end
