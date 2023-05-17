@@ -64,6 +64,9 @@ Rails.application.routes.draw do
       post :pay
       post :cancel
     end
+    resources :winner do
+      post :submit, :pay, :ship, :deliver, :publish, :remove_publish
+    end
   end
 
 end

@@ -28,7 +28,6 @@
         <%= button_to 'pay', winner_pay_path(winner), data: { turbo: false } if winner.may_pay? %>
         <%= button_to 'ship', winner_ship_path(winner), data: { turbo: false } if winner.may_ship? %>
         <%= button_to 'deliver', winner_deliver_path(winner), data: { turbo: false } if winner.may_deliver? %>
-        <%= button_to 'share', winner_share_path(winner), data: { turbo: false } if winner.may_share? %>
         <%= button_to 'publish', winner_publish_path(winner), data: { turbo: false } if winner.may_publish? %>
         <%= button_to 'remove publish', winner_remove_publish_path(winner), data: { turbo: false } if winner.may_remove_publish? %>
       </td>
